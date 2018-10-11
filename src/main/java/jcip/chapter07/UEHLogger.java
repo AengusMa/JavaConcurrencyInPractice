@@ -9,8 +9,11 @@ import java.util.logging.Logger;
  *
  * 程序清单7-25：将异常写入日志的UncaughtExceptionHandler
  */
-public class UEHLogger  implements Thread.UncaughtExceptionHandler{
+public class UEHLogger implements Thread.UncaughtExceptionHandler {
 
+  /**
+   * 处理未捕获异常，写入日志
+   */
   @Override
   public void uncaughtException(Thread t, Throwable e) {
     Logger logger = Logger.getAnonymousLogger();
