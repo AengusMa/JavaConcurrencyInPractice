@@ -53,6 +53,7 @@ public abstract class TransformingSequential {
       final Collection<T> results) {
     for (final Node<T> n : nodes) {
       exec.execute(new Runnable() {
+        @Override
         public void run() {
           results.add(n.compute());
         }
