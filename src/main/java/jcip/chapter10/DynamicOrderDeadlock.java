@@ -22,27 +22,35 @@ public class DynamicOrderDeadlock {
         } else {
           fromAccount.debit(amount);
           toAccount.credit(amount);
+          System.out.println(fromAccount.getBalance().getAmount()+"=======");
         }
       }
     }
   }
 
   static class DollarAmount implements Comparable<DollarAmount> {
-    // Needs implementation
+
+    private int amount;
 
     public DollarAmount(int amount) {
+      this.amount = amount;
     }
 
     public DollarAmount add(DollarAmount d) {
-      return null;
+      return new DollarAmount(amount + d.getAmount());
+    }
+
+    public int getAmount() {
+      return amount;
     }
 
     public DollarAmount subtract(DollarAmount d) {
-      return null;
+      return new DollarAmount(d.getAmount() - amount);
     }
 
+    @Override
     public int compareTo(DollarAmount dollarAmount) {
-      return 0;
+      return amount - dollarAmount.getAmount();
     }
   }
 
@@ -54,6 +62,7 @@ public class DynamicOrderDeadlock {
 
     public Account() {
       acctNo = sequence.incrementAndGet();
+      balance = new DollarAmount(10);
     }
 
     void debit(DollarAmount d) {
