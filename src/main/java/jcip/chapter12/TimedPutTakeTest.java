@@ -1,5 +1,6 @@
 package jcip.chapter12;
 
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.CyclicBarrier;
 
 /**
@@ -38,20 +39,27 @@ public class TimedPutTakeTest extends PutTakeTest {
 
   public static void main(String[] args) throws Exception {
 //    每个线程中的测试次数
+    ConcurrentLinkedQueue<Integer> test = new ConcurrentLinkedQueue<>();
+    test.add(1);
+    test.add(2);
+    test.add(3);
+    test.add(4);
+    test.poll();
+    test.poll();
     int tpt = 100000;
-    for (int cap = 1; cap <= 1000; cap *= 10) {
-      System.out.println("Capacity: " + cap);
-      for (int pairs = 1; pairs <= 128; pairs *= 2) {
-        TimedPutTakeTest t = new TimedPutTakeTest(cap, pairs, tpt);
-        System.out.print("Pairs: " + pairs + "\t");
-        t.test();
-        System.out.print("\t");
-        Thread.sleep(1000);
-        t.test();
-        System.out.println();
-        Thread.sleep(1000);
-      }
-    }
-    PutTakeTest.pool.shutdown();
+//    for (int cap = 1; cap <= 1000; cap *= 10) {
+//      System.out.println("Capacity: " + cap);
+//      for (int pairs = 1; pairs <= 128; pairs *= 2) {
+//        TimedPutTakeTest t = new TimedPutTakeTest(cap, pairs, tpt);
+//        System.out.print("Pairs: " + pairs + "\t");
+//        t.test();
+//        System.out.print("\t");
+//        Thread.sleep(1000);
+//        t.test();
+//        System.out.println();
+//        Thread.sleep(1000);
+//      }
+//    }
+//    PutTakeTest.pool.shutdown();
   }
 }
